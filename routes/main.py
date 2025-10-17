@@ -142,16 +142,14 @@ def transfer():
     )
     return render_template("transfer.html", success=True, message="Перевод отправлен")
 
-@main_bp.route("/profile/<int:user_id>")
-def profile(user_id):
+@main_bp.route("/profile")
+def profile():
+    uid = current_user_id()
+    if not uid:
+        return redirect(url_for("auth.login"))
     with get_db_session() as db:
-        user = db.query(User).filter(User.id == user_id).first()
-
-    if not user:
-        return render_template("profile.html", user=None, error="Пользователь не найден")
-
+        user = db.query(User).filter(User.id == uid).first()
     return render_template("profile.html", user=user)
-
 
 @main_bp.route("/apply_card", methods=["GET", "POST"])
 @login_required()
