@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Вход в аккаунт — Bank Comfort{% endblock %}
+{% block content %}
+<div class="auth-form">
+    <h2>Вход в аккаунт</h2>
+    <form method="POST">
+        <label>Имя пользователя</label>
+        <input name="username" type="text" required>
+
+        <label>Пароль</label>
+        <input name="password" type="password" required>
+
+        <button type="submit" class="btn primary">Войти</button>
+    </form>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</div>
+{% endblock %}

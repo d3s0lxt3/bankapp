@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Заявка на карту{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/apply_card.css') }}">
+{% endblock %}
+
+{% block content %}
+  <h2>Заявка на выпуск кредитной карты</h2>
+
+  {% if alert %}
+    <div style="border:1px solid #c00; background:#fdd; padding:10px;">
+      <strong>Template rendering error (simulated):</strong>
+      <pre>{{ sstiex }}</pre>
+    </div>
+  {% endif %}
+
+  {% if success %}
+    <div style="border:1px solid #0c0; background:#dfd; padding:10px;">
+      Заявка принята. Спасибо!
+    </div>
+  {% endif %}
+
+<form method="post" action="{{ url_for('main.apply_card') }}">
+    <label>ФИО владельца:<br><input type="text" name="holder" style="width:400px;" required /></label><br><br>
+    <label>Тип карты:<br>
+        <select name="type" required>
+            <option value="Visa Classic">Visa Classic</option>
+            <option value="MasterCard Standard">MasterCard Standard</option>
+            <option value="Mir">Мир</option>
+        </select>
+    </label><br><br>
+    <label>Телефон:<br><input type="text" name="phone" /></label><br><br>
+    <label>Комментарий:<br><textarea name="comments" rows="6" cols="60"></textarea></label><br><br>
+    <input type="submit" value="Отправить" />
+</form>
+{% endblock %}

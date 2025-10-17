@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Перевод средств{% endblock %}
+{% block content %}
+<h2>Совершить перевод</h2>
+
+<form method="POST" class="form-transfer">
+  <div class="form-group">
+    <label>Получатель (номер карты или счёта):</label>
+    <input name="recipient" type="text" required>
+  </div>
+
+  <div class="form-group">
+    <label>Сумма:</label>
+    <input name="amount" type="number" step="0.01" min="0.01" required>
+  </div>
+
+  <div class="form-group">
+    <label>Комментарий:</label>
+    <textarea name="comment" rows="3"></textarea>
+  </div>
+
+  <button type="submit" class="btn primary">Отправить</button>
+</form>
+
+{% if success %}
+  <p class="message success">Перевод выполнен успешно!</p>
+{% endif %}
+{% if error %}
+  <p class="message error">{{ error }}</p>
+{% endif %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/transfer.css') }}">
+{% endblock %}

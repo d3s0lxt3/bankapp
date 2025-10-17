@@ -1,0 +1,3 @@
+{"ts": "2025-10-13T12:28:17.891185Z", "event": "user_registered", "source_ip": "127.0.0.1", "user": "dadadasd", "details": {"email": "dasda@gmail.com"}}
+{"ts": "2025-10-13T12:28:37.381138Z", "event": "user_registered", "source_ip": "127.0.0.1", "user": "qwe", "details": {"email": "qwe@gmail.com"}}
+{"ts": "2025-10-13T12:28:42.721101Z", "event": "login_succeeded", "source_ip": "127.0.0.1", "user": "qwe", "details": "login ok"}

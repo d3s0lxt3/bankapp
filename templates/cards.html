@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Мои карты{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cards.css') }}">
+{% endblock %}
+
+{% block content %}
+<h2>Ваши карты</h2>
+<div class="cards-list">
+    {% for card in cards %}
+    <div class="card">
+        <div class="card-type">{{ card.type }}</div>
+        <div class="card-number">**** **** **** {{ card.number[-4:] }}</div>
+        <div class="card-holder">Владелец: {{ card.holder }}</div>
+        <div class="card-cvv">CVV: {{ card.cvv }}</div>
+        <div class="card-expiry">Действует до {{ card.expiry }}</div>
+        <div class="card-balance">{{ "%.2f"|format(card.balance) }} ₽</div>
+    </div>
+    {% endfor %}
+</div>
+<a href="{{ url_for('cards.apply') }}" class="btn secondary">Запросить новую карту</a>
+{% endblock %}

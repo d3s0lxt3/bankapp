@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Поддержка — Bank Comfort{% endblock %}
+{% block content %}
+<section class="support-hero">
+  <h1>Служба поддержки Bank Comfort</h1>
+  <p>Нужна помощь? Мы поможем решить вопросы по счёту, переводам, картам и безопасности.</p>
+</section>
+
+<section class="support-grid">
+  <div class="support-left">
+    <h2>Частые вопросы</h2>
+
+    <div class="faq">
+      <h3>Как восстановить пароль?</h3>
+      <p>На странице входа нажмите «Забыли пароль», введите email — мы пришлём инструкции для сброса.</p>
+    </div>
+
+    <div class="faq">
+      <h3>Как заказать новую карту?</h3>
+      <p>Перейдите в раздел «Карты» → «Запросить карту». Заявка рассматривается до 3 рабочих дней.</p>
+    </div>
+
+    <div class="faq">
+      <h3>Комиссии за переводы</h3>
+      <p>Переводы внутри банка бесплатные. Переводы в другие банки — согласно тарифам, смотрите раздел «Тарифы».</p>
+    </div>
+
+    <h3>Рабочее время поддержки</h3>
+    <p>Пн—Пт: 08:00—20:00, Сб—Вс: 10:00—18:00 (онлайн-чат и email 24/7)</p>
+  </div>
+
+  <aside class="support-right">
+    <h2>Связаться с нами</h2>
+    <form method="post" action="{{ url_for('support') }}">
+      <label for="name">Имя</label>
+      <input id="name" name="name" type="text" required>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required>
+
+      <label for="category">Категория</label>
+      <select id="category" name="category">
+        <option>Вопрос по картам</option>
+        <option>Проблема с переводом</option>
+        <option>Безопасность</option>
+        <option>Другое</option>
+      </select>
+
+      <label for="message">Описание</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+
+      <button type="submit" class="btn primary">Отправить запрос</button>
+    </form>
+
+    <div class="contact-box">
+      <h4>Телефон</h4>
+      <p>8 800 555 35 35</p>
+      <h4>Почта</h4>
+      <p>support@bankcomfort.example</p>
+    </div>
+  </aside>
+</section>
+{% endblock %}

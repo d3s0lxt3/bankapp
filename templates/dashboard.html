@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Панель управления{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<h2>Здравствуйте, {{ user.full_name or user.username }}!</h2>
+
+<section class="dashboard">
+    <div class="account-summary">
+        <h3>Ваш баланс</h3>
+        <div class="balance">{{ "%.2f"|format(account.balance) }} ₽</div>
+        <p>Номер счёта: {{ account.number }}</p>
+    </div>
+
+    <div class="stats">
+        <h3>Статистика расходов</h3>
+    </div>
+</section>
+
+<section class="recent">
+    <h3>Последние операции</h3>
+    {% if transactions %}
+    <table>
+        <tr><th>Дата</th><th>Описание</th><th>Сумма</th><th>Статус</th></tr>
+        {% for t in transactions %}
+        <tr>
+            <td>{{ t.timestamp.strftime("%d.%m.%Y %H:%M") }}</td>
+            <td>{{ t.description }}</td>
+            <td class="{% if t.amount < 0 %}minus{% else %}plus{% endif %}">{{ "%.2f"|format(t.amount) }} ₽</td>
+            <td>{{ t.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>Пока нет операций.</p>
+    {% endif %}
+</section>
+{% endblock %}

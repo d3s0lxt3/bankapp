@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}О компании — Bank Comfort{% endblock %}
+{% block content %}
+
+<section class="about-hero">
+  <h1>О компании Bank Comfort</h1>
+  <p>Мы создаём цифровой банк нового поколения — надёжный, быстрый и прозрачный.</p>
+</section>
+
+<section class="about-section">
+  <h2>Наша миссия</h2>
+  <p>
+    Bank Comfort — это не просто интернет-банк. Мы строим экосистему, в которой финансы становятся понятными и доступными каждому.
+    Мы верим, что технологии и прозрачность — ключ к доверию клиентов. Наша цель — сделать управление финансами простым и безопасным.
+  </p>
+</section>
+
+<section class="about-section">
+  <h2>История компании</h2>
+  <p>
+    Основанная в 2015 году группой специалистов в области ИТ и финансов, Bank Comfort начинал как небольшой финтех-стартап, 
+    предоставляющий сервис мгновенных онлайн-платежей между пользователями.  
+    Сегодня Bank Comfort обслуживает более 1,2 млн клиентов по всей стране, обеспечивая им доступ к современным банковским продуктам — 
+    онлайн-счётам, картам, кредитам и инвестициям.
+  </p>
+</section>
+
+<section class="about-section">
+  <h2>Наши принципы</h2>
+  <ul class="values-list">
+    <li><strong>Прозрачность.</strong> Все операции и тарифы открыты и понятны клиенту.</li>
+    <li><strong>Безопасность.</strong> Данные и транзакции клиентов шифруются и защищаются на уровне инфраструктуры.</li>
+    <li><strong>Инновации.</strong> Мы постоянно внедряем новые технологии — от биометрии до ИИ-аналитики.</li>
+  </ul>
+</section>
+
+<section class="about-team">
+  <h2>Команда руководителей</h2>
+  <div class="team-grid">
+    <div class="team-card">
+      <img src="{{ url_for('static', filename='img/team_ceo.jpg') }}" alt="CEO">
+      <h3>Иван Громов</h3>
+      <p>Генеральный директор</p>
+    </div>
+    <div class="team-card">
+      <img src="{{ url_for('static', filename='img/team_cto.jpg') }}" alt="CTO">
+      <h3>Мария Руденко</h3>
+      <p>Технический директор</p>
+    </div>
+    <div class="team-card">
+      <img src="{{ url_for('static', filename='img/team_ciso.jpg') }}" alt="CISO">
+      <h3>Алексей Сафронов</h3>
+      <p>Руководитель службы информационной безопасности</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-section">
+  <p>
+    Вы можете ознакомиться с нашими <a href="{{ url_for('static', filename='docs/privacy_policy.pdf') }}">правилами конфиденциальности</a>
+    и <a href="{{ url_for('static', filename='docs/terms.pdf') }}">пользовательским соглашением</a>.
+  </p>
+</section>
+
+{% endblock %}

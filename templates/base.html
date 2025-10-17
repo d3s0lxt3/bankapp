@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Bank Comfort{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head %}{% endblock %}
+  <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-container">
+      <div class="logo">
+        <a href="{{ url_for('main.index') }}">🏦 <strong>Bank Comfort</strong></a>
+      </div>
+      <nav class="nav">
+        {% if session.get('user_id') %}
+            <a href="{{ url_for('main.index') }}">Главная</a>
+            <a href="{{ url_for('main.dashboard') }}">Панель</a>
+            <a href="{{ url_for('main.cards') }}">Карты</a>
+            <a href="{{ url_for('main.transactions') }}">Операции</a>
+            <a href="{{ url_for('main.transfer') }}">Переводы</a>
+            <a href="{{ url_for('main.profile', user_id=current_user.id) }}">Профиль</a>
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-logout">Выход</a>
+        {% else %}
+            <a href="{{ url_for('auth.login') }}" class="btn btn-login">Вход</a>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Регистрация</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 <strong>Bank Comfort</strong> — лидер среди онлайн-банков.</p>
+      <p><a href="{{ url_for('main.support') }}">Поддержка</a> | <a href="{{ url_for('main.about') }}">О нас</a></p>
+    </div>
+  </footer>
+</body>
+</html>

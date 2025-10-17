@@ -1,0 +1,111 @@
+body {
+  background-color: #f8fafc;
+}
+
+h2 {
+  text-align: center;
+  color: #003366;
+  margin-bottom: 25px;
+  font-size: 1.8em;
+}
+
+.filter-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto 25px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+}
+
+.filter-form label {
+  font-weight: 600;
+  color: #222;
+}
+
+.filter-form input[type="date"] {
+  padding: 8px 10px;
+  border: 1px solid #ccd;
+  border-radius: 8px;
+  font-size: 0.95em;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-form input[type="date"]:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 4px rgba(0, 102, 204, 0.25);
+}
+
+.filter-form .btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  background-color: #0066cc;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.filter-form .btn:hover {
+  background-color: #004c99;
+}
+
+table.transactions {
+  width: 90%;
+  margin: 0 auto 40px auto;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+table.transactions th,
+table.transactions td {
+  text-align: center;
+  padding: 12px 8px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95em;
+}
+
+table.transactions th {
+  background-color: #0066cc;
+  color: white;
+  font-weight: 600;
+}
+
+table.transactions tr:nth-child(even) {
+  background-color: #f9fbff;
+}
+
+table.transactions tr:hover {
+  background-color: #eef5ff;
+}
+
+.plus {
+  color: #009900;
+  font-weight: 600;
+}
+
+.minus {
+  color: #cc0000;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  table.transactions {
+    width: 100%;
+    font-size: 0.85em;
+  }
+
+  .filter-form {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

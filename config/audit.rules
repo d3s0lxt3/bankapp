@@ -1,0 +1,3 @@
+-w /opt/bankapp/app.py -p wa -k app_changes
+-w /opt/bankapp/data -p wa -k data_mod
+-w /var/log/bankapp -p rwa -k logs_access

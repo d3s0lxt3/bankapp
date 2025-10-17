@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Ошибка — Bank Comfort{% endblock %}
+{% block content %}
+<section class="error-page">
+  <h1>Что-то пошло не так</h1>
+
+  {% if code %}
+  <p class="muted">Код ошибки: <strong>{{ code }}</strong></p>
+  {% endif %}
+
+  <div class="error-box">
+    <p>{{ message or "Произошла непредвиденная ошибка. Наши специалисты уже получают уведомление." }}</p>
+
+    {% if code == 500 %}
+      <p>Пожалуйста, попробуйте повторить действие через минуту. Если проблема сохраняется — обратитесь в поддержку.</p>
+    {% endif %}
+
+    <p class="muted">Полезные ссылки:</p>
+    <ul>
+      <li><a href="{{ url_for('main.index') }}">Вернуться на главную</a></li>
+      <li><a href="{{ url_for('support') }}">Контакты поддержки</a></li>
+      <li><a href="{{ url_for('main.health') }}">Проверка состояния сервиса (health)</a></li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

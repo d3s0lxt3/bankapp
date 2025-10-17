@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}История операций{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/transactions.css') }}">
+{% endblock %}
+
+{% block content %}
+<h2>История операций</h2>
+<form method="GET" class="filter-form">
+    <label>Период:</label>
+    <input type="date" name="from_date">
+    <input type="date" name="to_date">
+    <button type="submit" class="btn secondary">Фильтр</button>
+</form>
+
+<table class="transactions">
+    <tr>
+        <th>Дата</th>
+        <th>Тип</th>
+        <th>Контрагент</th>
+        <th>Сумма</th>
+        <th>Комментарий</th>
+        <th>Статус</th>
+    </tr>
+    {% for t in transactions %}
+    <tr>
+        <td>{{ t.timestamp.strftime('%d.%m.%Y') }}</td>
+        <td>{{ t.type }}</td>
+        <td>{{ t.counterparty }}</td>
+        <td class="{% if t.amount < 0 %}minus{% else %}plus{% endif %}">{{ "%.2f"|format(t.amount) }} ₽</td>
+        <td>{{ t.comment }}</td>
+        <td>{{ t.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

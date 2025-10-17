@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Регистрация — Bank Comfort{% endblock %}
+{% block content %}
+<div class="auth-form">
+    <h2>Создать аккаунт</h2>
+    <form method="POST">
+        <label>Имя пользователя</label>
+        <input name="username" type="text" required>
+
+        <label>ФИО</label>
+        <input name="fullname" type="text" placeholder="Иванов Иван Иванович" required>
+
+        <label>Email</label>
+        <input name="email" type="email" required>
+
+        <label>Пароль</label>
+        <input name="password" type="password" required>
+
+        <label>Подтверждение пароля</label>
+        <input name="confirm_password" type="password" required>
+
+        <button type="submit" class="btn primary">Создать</button>
+    </form>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</div>
+{% endblock %}

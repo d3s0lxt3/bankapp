@@ -1,0 +1,170 @@
+:root {
+  --primary: #0066ff;
+  --secondary: #003366;
+  --text: #222;
+  --bg: #f8fafc;
+  --white: #ffffff;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --radius: 10px;
+}
+
+.dashboard-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h2 {
+  font-size: 2rem;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.dashboard .account-summary,
+.dashboard .stats {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard .account-summary:hover,
+.dashboard .stats:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.account-summary h3,
+.stats h3 {
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.account-summary .balance {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.account-summary p {
+  font-size: 1rem;
+  color: #444;
+  margin: 0;
+}
+
+.stats img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-top: 1rem;
+}
+
+.recent {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.recent h3 {
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.recent table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.recent table th,
+.recent table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.recent table th {
+  color: var(--secondary);
+  font-weight: 600;
+  background: #f3f6fa;
+}
+
+.recent table tr:hover td {
+  background-color: #f8f9fb;
+}
+
+.recent .plus {
+  color: #008800;
+  font-weight: 600;
+}
+
+.recent .minus {
+  color: #c00;
+  font-weight: 600;
+}
+
+.recent p {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+
+.dashboard .btn {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.dashboard .btn:hover {
+  background: #004ecc;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+  .dashboard .account-summary,
+  .dashboard .stats {
+    padding: 1.5rem;
+  }
+  .account-summary .balance {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .recent table th,
+  .recent table td {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  .dashboard-header h2 {
+    font-size: 1.6rem;
+  }
+}
