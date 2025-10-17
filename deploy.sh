@@ -66,7 +66,7 @@ User=${APP_USER}
 Group=${APP_USER}
 WorkingDirectory=${APP_DIR}
 Environment=\"PATH=${VENV_DIR}/bin\"
-ExecStart=${VENV_DIR}/bin/gunicorn --workers 3 --bind unix:${GUNICORN_SOCKET} wsgi:app
+ExecStart=${VENV_DIR}/bin/gunicorn --workers 3 --bind unix:${GUNICORN_SOCKET} wsgi:application
 
 [Install]
 WantedBy=multi-user.target
