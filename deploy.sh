@@ -31,12 +31,6 @@ pip install --upgrade pip
 pip install -r ${APP_DIR}/requirements.txt
 "
 
-echo "[DEPLOY] Applying database migrations..."
-sudo -u ${APP_USER} bash -c "
-source ${VENV_DIR}/bin/activate
-python3 ${APP_DIR}/scripts/migrate.py
-"
-
 if [ ! -f "${DB_FILE}" ] || [ ! -s "${DB_FILE}" ]; then
     echo "[DEPLOY] Seeding database with initial users..."
     sudo -u ${APP_USER} bash -c "
