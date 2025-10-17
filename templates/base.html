@@ -22,7 +22,7 @@
             <a href="{{ url_for('main.cards') }}">Карты</a>
             <a href="{{ url_for('main.transactions') }}">Операции</a>
             <a href="{{ url_for('main.transfer') }}">Переводы</a>
-            <a href="{{ url_for('main.profile', user_id=current_user.id) }}">Профиль</a>
+            <a href="{{ url_for('main.profile') }}">Профиль</a>
             <a href="{{ url_for('auth.logout') }}" class="btn btn-logout">Выход</a>
         {% else %}
             <a href="{{ url_for('auth.login') }}" class="btn btn-login">Вход</a>
