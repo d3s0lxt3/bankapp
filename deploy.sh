@@ -12,33 +12,44 @@ NGINX_CONF=/etc/nginx/sites-available/${SERVICE_NAME}.conf
 
 echo "[DEPLOY] Starting automated deployment..."
 
-mkdir -p ${LOG_DIR} ${APP_DIR}/data
-chown -R ${APP_USER}:${APP_USER} ${APP_DIR}
-chmod -R 750 ${APP_DIR}
+sudo mkdir -p ${LOG_DIR} ${APP_DIR}/data
+sudo chown -R ${APP_USER}:${APP_USER} ${APP_DIR}
+sudo chmod -R 750 ${APP_DIR}
 
 echo "[DEPLOY] Syncing code..."
-rsync -a --exclude 'venv' ./ ${APP_DIR}/
+sudo rsync -a --exclude 'venv' ./ ${APP_DIR}/
+sudo chown -R ${APP_USER}:${APP_USER} ${APP_DIR}
 
 echo "[DEPLOY] Setting up Python environment..."
-sudo -u ${APP_USER} bash <<EOF
-python3 -m venv ${VENV_DIR}
+if [ ! -d "${VENV_DIR}" ]; then
+    sudo -u ${APP_USER} python3 -m venv ${VENV_DIR}
+fi
+
+sudo -u ${APP_USER} bash -c "
 source ${VENV_DIR}/bin/activate
 pip install --upgrade pip
 pip install -r ${APP_DIR}/requirements.txt
-EOF
+"
 
 echo "[DEPLOY] Applying database migrations..."
-sudo -u ${APP_USER} bash <<EOF
+sudo -u ${APP_USER} bash -c "
 source ${VENV_DIR}/bin/activate
 python3 ${APP_DIR}/scripts/migrate.py
-EOF
+"
 
 if [ ! -f "${DB_FILE}" ] || [ ! -s "${DB_FILE}" ]; then
     echo "[DEPLOY] Seeding database with initial users..."
-    sudo -u ${APP_USER} bash <<EOF
+    sudo -u ${APP_USER} bash -c "
 source ${VENV_DIR}/bin/activate
-python3 -c "from app import create_app; from core.database import init_db, get_db_session, seed_database; app=create_app(); init_db(app); from core.database import DB_SESSION; seed_database(DB_SESSION())"
-EOF
+python3 - <<PY
+from app import create_app
+from core.database import init_db, DB_SESSION, seed_database
+
+app = create_app()
+init_db(app)
+seed_database(DB_SESSION())
+PY
+"
 else
     echo "[DEPLOY] Database exists, skipping seed."
 fi
@@ -54,18 +65,16 @@ After=network.target
 User=${APP_USER}
 Group=${APP_USER}
 WorkingDirectory=${APP_DIR}
-Environment="PATH=${VENV_DIR}/bin"
+Environment=\"PATH=${VENV_DIR}/bin\"
 ExecStart=${VENV_DIR}/bin/gunicorn --workers 3 --bind unix:${GUNICORN_SOCKET} wsgi:app
 
 [Install]
 WantedBy=multi-user.target
 EOL
 
-echo "[DEPLOY] Reloading systemd and starting service..."
 sudo systemctl daemon-reload
 sudo systemctl enable ${SERVICE_NAME}
 sudo systemctl restart ${SERVICE_NAME}
-sudo systemctl status ${SERVICE_NAME} --no-pager
 
 echo "[DEPLOY] Setting up Nginx..."
 sudo bash -c "cat > ${NGINX_CONF}" <<EOL
@@ -95,4 +104,3 @@ sudo nginx -t
 sudo systemctl restart nginx
 
 echo "[DEPLOY] Deployment complete! Application is running via Gunicorn + Nginx."
-echo "Visit your server IP in the browser to access the app."
