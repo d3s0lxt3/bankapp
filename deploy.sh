@@ -16,6 +16,9 @@ sudo mkdir -p ${LOG_DIR} ${APP_DIR}/data
 sudo chown -R ${APP_USER}:${APP_USER} ${APP_DIR}
 sudo chmod -R 750 ${APP_DIR}
 
+sudo chown -R ${APP_USER}:${APP_USER} ${LOG_DIR}
+sudo chmod -R 750 ${LOG_DIR}
+
 echo "[DEPLOY] Syncing code..."
 sudo rsync -a --exclude 'venv' ./ ${APP_DIR}/
 sudo chown -R ${APP_USER}:${APP_USER} ${APP_DIR}
@@ -59,8 +62,8 @@ After=network.target
 User=${APP_USER}
 Group=${APP_USER}
 WorkingDirectory=${APP_DIR}
-Environment=\"PATH=${VENV_DIR}/bin\"
-Environment=\"PYTHONPATH=${APP_DIR}"
+Environment="PATH=${VENV_DIR}/bin"
+Environment="PYTHONPATH=${APP_DIR}"
 ExecStart=${VENV_DIR}/bin/gunicorn --workers 3 --bind unix:${GUNICORN_SOCKET} wsgi:application
 
 [Install]
